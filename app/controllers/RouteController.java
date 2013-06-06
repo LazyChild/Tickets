@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Airport;
 import models.Route;
 import play.data.Form;
 import play.mvc.Controller;
@@ -23,11 +24,12 @@ public class RouteController extends Controller {
 
     public static Result save() {
         Form<Route> filledForm = routeForm.bindFromRequest();
-        if (filledForm.hasErrors()) {
+        Route route = validate(filledForm);
+        if (route == null) {
             flash("error", "There were errors in the form.");
             return badRequest(route_create.render(filledForm));
         }
-        filledForm.get().save();
+        route.save();
         return redirect(routes.RouteController.index());
     }
 
@@ -38,16 +40,28 @@ public class RouteController extends Controller {
 
     public static Result update(Long id) {
         Form<Route> filledForm = routeForm.bindFromRequest();
-        if (filledForm.hasErrors()) {
+        Route route = validate(filledForm);
+        if (route == null) {
             flash("error", "There were errors in the form.");
             return badRequest(route_edit.render(filledForm));
         }
-        filledForm.get().update();
+        route.update();
         return redirect(routes.RouteController.index());
     }
 
     public static Result delete(Long id) {
-        Route.finder.byId(id).delete();
+        Route.finder.ref(id).delete();
         return redirect(routes.RouteController.index());
+    }
+
+    private static Route validate(Form<Route> form) {
+        if (form.hasErrors()) {
+            return null;
+        }
+        Route route = form.get();
+        if (route.arriveAirport.id == null || route.departAirport.id == null) {
+            return null;
+        }
+        return route;
     }
 }

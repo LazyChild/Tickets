@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
@@ -14,22 +15,12 @@ public class Ticket extends Model {
     public Long id;
 
     @ManyToOne
+    @Constraints.Required
     public Flight flight;
 
     @ManyToOne
+    @Constraints.Required
     public Passenger passenger;
 
     public static Finder<Long, Ticket> finder = new Finder<Long, Ticket>(Long.class, Ticket.class);
-
-    public static List<Ticket> all() {
-        return finder.all();
-    }
-
-    public static void create(Ticket ticket) {
-        ticket.save();
-    }
-
-    public static void delete(Long id) {
-        finder.byId(id).delete();
-    }
 }

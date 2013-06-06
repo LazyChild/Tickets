@@ -47,7 +47,7 @@ public class AirportController extends Controller {
     }
 
     public static Result delete(Long id) {
-        Airport.finder.byId(id).delete();
+        Airport.finder.ref(id).delete();
         return redirect(routes.AirportController.index());
     }
 }

@@ -10,15 +10,13 @@ import javax.persistence.Id;
 public class Passenger extends Model {
 
     @Id
-    public Long id;
-
-    @Constraints.Required
-    public String name;
-
     @Constraints.Required
     @Constraints.MinLength(value = 18)
     @Constraints.MaxLength(value = 18)
     public String identify;
 
-    public static Finder<Long, Passenger> finder = new Finder<Long, Passenger>(Long.class, Passenger.class);
+    @Constraints.Required
+    public String name;
+
+    public static Finder<String, Passenger> finder = new Finder<String, Passenger>(String.class, Passenger.class);
 }

@@ -36,11 +36,10 @@ create table flight (
 ;
 
 create table passenger (
-  id                        bigint auto_increment not null,
+  identify                  varchar(255) not null,
   booking_id                bigint not null,
   name                      varchar(255),
-  identify                  varchar(255),
-  constraint pk_passenger primary key (id))
+  constraint pk_passenger primary key (identify))
 ;
 
 create table route (
@@ -53,7 +52,7 @@ create table route (
 create table ticket (
   id                        bigint auto_increment not null,
   flight_id                 bigint,
-  passenger_id              bigint,
+  passenger_identify        varchar(255),
   constraint pk_ticket primary key (id))
 ;
 
@@ -81,8 +80,8 @@ alter table route add constraint fk_route_arriveAirport_6 foreign key (arrive_ai
 create index ix_route_arriveAirport_6 on route (arrive_airport_id);
 alter table ticket add constraint fk_ticket_flight_7 foreign key (flight_id) references flight (id) on delete restrict on update restrict;
 create index ix_ticket_flight_7 on ticket (flight_id);
-alter table ticket add constraint fk_ticket_passenger_8 foreign key (passenger_id) references passenger (id) on delete restrict on update restrict;
-create index ix_ticket_passenger_8 on ticket (passenger_id);
+alter table ticket add constraint fk_ticket_passenger_8 foreign key (passenger_identify) references passenger (identify) on delete restrict on update restrict;
+create index ix_ticket_passenger_8 on ticket (passenger_identify);
 
 
 
