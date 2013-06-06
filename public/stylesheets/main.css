@@ -1,0 +1,74 @@
+header {
+    position: relative;
+    padding: 5px 0;
+    color: #fff;
+    text-align: center;
+    background: #020031; /* Old browsers */
+    background: -moz-linear-gradient(45deg,  #020031 0%, #01518e 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#020031), color-stop(100%,#01518e)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(45deg,  #020031 0%,#01518e 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg,  #020031 0%,#01518e 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg,  #020031 0%,#01518e 100%); /* IE10+ */
+    background: linear-gradient(45deg,  #020031 0%,#01518e 100%); /* W3C */
+}
+
+header .container {
+    margin-right: 10%;
+}
+
+header h1 {
+    font-weight: bold;
+    margin-right: 2%;
+}
+
+#page {
+    margin: 5% auto;
+    width: 91%;
+}
+
+#left-nav {
+    margin-right: 5%;
+}
+
+#left-nav ul {
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 4px #afbfbe;
+    -moz-box-shadow: 0 1px 4px #afbfbe;
+    box-shadow: 0 1px 4px #afbfbe;
+}
+
+.intro {
+    margin-top: 2%;
+    width: 85%;
+    text-align: justify;
+}
+
+#search {
+    padding-right: 10%;
+}
+
+.index-table {
+    margin-top: 10%;
+}
+
+#segments {
+    margin-top: 5%;
+}
+
+.route-row {
+    background-color: #f9f9f9;
+}
+
+.ticket-table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+h3 {
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}

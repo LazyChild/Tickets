@@ -1,0 +1,23 @@
+@(routeForm : Form[Route])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Flight System") {
+    @commons.error()
+    <div class="row-fluid">
+        <div class="span6">
+            <h2>编辑航线</h2>
+            @form(routes.RouteController.update(routeForm.get.id)) {
+                @inputText(routeForm("id"), '_label -> "编号",  '_showConstraints -> false, 'readonly -> "readonly")
+                @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "出发机场")
+                @select(routeForm("arriveAirport.id"), options(Airport.options()), '_label -> "到达机场")
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">编辑</button>
+                    <a href="@routes.RouteController.index()" class="btn">取消</a>
+                </div>
+            }
+        </div>
+        <div class="span6"></div>
+    </div>
+}

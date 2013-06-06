@@ -1,0 +1,33 @@
+@(airports: List[Airport])
+
+@main("Flight System") {
+    <div id="search">
+        <div class="span6"></div>
+        <div class="span6">
+            <a href="@routes.AirportController.create()" class="btn btn-primary pull-right">
+                添加机场
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped index-table" id="data-table">
+        <tbody>
+            <th>编号</th><th>机场</th><th></th><th></th>
+            @for(airport <- airports) {
+                <tr>
+                    <td>@airport.id</td>
+                    <td>@airport.name</td>
+                    <td>
+                        <a href="@routes.AirportController.edit(airport.id)">
+                            <i class="icon-pencil"></i> Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@routes.AirportController.delete(airport.id)" role="button" onclick='return confirm("你确定要删除 @airport.name 么？");'>
+                            <i class="icon-remove"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

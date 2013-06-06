@@ -1,0 +1,34 @@
+@(routess: List[Route])
+
+@main("Flight System") {
+    <div id="search">
+        <div class="span6"></div>
+        <div class="span6">
+            <a href="@routes.RouteController.create()" class="btn btn-primary pull-right">
+                添加航线
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped index-table" id="data-table">
+        <tbody>
+            <th>编号</th><th>出发机场</th><th>到达机场</th><th></th><th></th>
+            @for(route <- routess) {
+                <tr>
+                    <td>@route.id</td>
+                    <td>@route.departAirport.name</td>
+                    <td>@route.arriveAirport.name</td>
+                    <td>
+                        <a href="@routes.RouteController.edit(route.id)">
+                            <i class="icon-pencil"></i> Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@routes.RouteController.delete(route.id)" role="button" onclick='return confirm("你确定要删除航线 @route.id 么？");'>
+                            <i class="icon-remove"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

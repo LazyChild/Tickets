@@ -1,0 +1,21 @@
+@(airportForm : Form[Airport])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Flight System") {
+    <div class="row-fluid">
+        <div class="span6">
+            <h2>编辑机场</h2>
+            @form(routes.AirportController.update(airportForm.get.id)) {
+                @inputText(airportForm("id"), '_label -> "编号",  '_showConstraints -> false, 'readonly -> "readonly")
+                @inputText(airportForm("name"), '_label -> "名称", '_showConstraints -> false)
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">编辑</button>
+                    <a href="@routes.AirportController.index()" class="btn">取消</a>
+                </div>
+            }
+        </div>
+        <div class="span6"></div>
+    </div>
+}

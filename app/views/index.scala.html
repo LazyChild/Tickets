@@ -1,0 +1,8 @@
+@(tickets: List[Ticket], ticketForm: Form[Ticket])
+
+@import  helper._
+@import helper.twitterBootstrap._
+
+@main("Welcome to tickets booking system.") {
+    <h1>@tickets.size ticket(s)</h1>
+}
