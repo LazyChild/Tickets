@@ -1,5 +1,6 @@
 package models;
 
+import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -12,6 +13,10 @@ public class Aircraft extends Model {
 
     @Id
     public Long id;
+
+    @Constraints.Required
+    @Formats.NonEmpty
+    public String name;
 
     @Constraints.Required
     public Integer economy;

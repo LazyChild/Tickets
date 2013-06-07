@@ -26,5 +26,12 @@ GET     /route/:id/delete           controllers.RouteController.delete(id: Long)
 GET     /route/:id/edit             controllers.RouteController.edit(id: Long)
 POST    /route/:id/update           controllers.RouteController.update(id: Long)
 
+GET     /aircraft                   controllers.AircraftController.index()
+GET     /aircraft/create            controllers.AircraftController.create()
+POST    /aircraft/save              controllers.AircraftController.save()
+GET     /aircraft/:id/delete        controllers.AircraftController.delete(id: Long)
+GET     /aircraft/:id/edit          controllers.AircraftController.edit(id: Long)
+POST    /aircraft/:id/update        controllers.AircraftController.update(id: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

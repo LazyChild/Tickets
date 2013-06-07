@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
@@ -13,12 +14,15 @@ public class Flight extends Model {
     public Long id;
 
     @ManyToOne
+    @Constraints.Required
     public Route route;
 
     @ManyToOne
+    @Constraints.Required
     public Airline airline;
 
     @ManyToOne
+    @Constraints.Required
     public Aircraft aircraft;
 
     public static Finder<Long, Flight> finder = new Finder<Long, Flight>(Long.class, Flight.class);

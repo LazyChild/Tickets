@@ -1,0 +1,35 @@
+@(aircrafts: List[Aircraft])
+
+@main("Flight System") {
+    <div id="search">
+        <div class="span6"></div>
+        <div class="span6">
+            <a href="@routes.AircraftController.create()" class="btn btn-primary pull-right">
+                添加飞机
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped index-table" id="data-table">
+        <tbody>
+            <th>编号</th><th>飞机名</th><th>头等舱容量</th><th>经济舱容量</th><th></th><th></th>
+            @for(aircraft <- aircrafts) {
+                <tr>
+                    <td>@aircraft.id</td>
+                    <td>@aircraft.name</td>
+                    <td>@aircraft.first</td>
+                    <td>@aircraft.economy</td>
+                    <td>
+                        <a href="@routes.AircraftController.edit(aircraft.id)">
+                            <i class="icon-pencil"></i> Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a href="@routes.AircraftController.delete(aircraft.id)" role="button" onclick='return confirm("你确定要删除 @aircraft.name 么？");'>
+                            <i class="icon-remove"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

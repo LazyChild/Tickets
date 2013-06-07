@@ -5,6 +5,7 @@
 
 create table aircraft (
   id                        bigint auto_increment not null,
+  name                      varchar(255),
   economy                   integer,
   first                     integer,
   constraint pk_aircraft primary key (id))
