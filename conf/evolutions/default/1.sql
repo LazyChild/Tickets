@@ -33,6 +33,8 @@ create table flight (
   route_id                  bigint,
   airline_id                bigint,
   aircraft_id               bigint,
+  depart_date               datetime,
+  arrive_date               datetime,
   constraint pk_flight primary key (id))
 ;
 
@@ -47,6 +49,8 @@ create table route (
   id                        bigint auto_increment not null,
   depart_airport_id         bigint,
   arrive_airport_id         bigint,
+  depart_time               datetime,
+  arrive_time               datetime,
   constraint pk_route primary key (id))
 ;
 

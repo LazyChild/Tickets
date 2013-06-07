@@ -2,6 +2,7 @@
 
 @import helper._
 @import helper.twitterBootstrap._
+@import PlayMagic._
 
 @main("Flight System") {
     @commons.error()
@@ -13,6 +14,25 @@
                     '_default -> "---- 请选择一个机场 ----")
                 @select(routeForm("arriveAirport.id"), options(Airport.options()), '_label -> "到达机场",
                     '_default -> "---- 请选择一个机场 ----")
+
+                @input(routeForm("departTime"), '_label -> "出发时间", '_showConstraints -> false) { (id, name, value, args) =>
+                    <div class="controls input-append time-picker">
+                        <input type="text" id="@id" name="@name" value="@value" data-format="hh:mm" @toHtmlArgs(args) />
+                        <span class="add-on">
+                            <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                            </i>
+                        </span>
+                    </div>
+                }
+                @input(routeForm("arriveTime"), '_label -> "到达时间", '_showConstraints -> false) { (id, name, value, args) =>
+                    <div class="controls input-append time-picker">
+                        <input type="text" id="@id" name="@name" value="@value" data-format="hh:mm" @toHtmlArgs(args) />
+                        <span class="add-on">
+                            <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                            </i>
+                        </span>
+                    </div>
+                }
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">添加</button>
                     <a href="@routes.RouteController.index()" class="btn">取消</a>

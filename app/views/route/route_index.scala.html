@@ -11,20 +11,22 @@
     </div>
     <table class="table table-striped index-table" id="data-table">
         <tbody>
-            <th>编号</th><th>出发机场</th><th>到达机场</th><th></th><th></th>
+            <th>编号</th><th>出发机场</th><th>到达机场</th><th>出发时间</th><th>到达时间</th><th></th><th></th>
             @for(route <- routess) {
                 <tr>
                     <td>@route.id</td>
                     <td>@route.departAirport.name</td>
                     <td>@route.arriveAirport.name</td>
+                    <td>@route.departTime.format("HH:mm")</td>
+                    <td>@route.arriveTime.format("HH:mm")</td>
                     <td>
                         <a href="@routes.RouteController.edit(route.id)">
-                            <i class="icon-pencil"></i> Edit
+                            <i class="icon-pencil"></i>
                         </a>
                     </td>
                     <td>
                         <a href="@routes.RouteController.delete(route.id)" role="button" onclick='return confirm("你确定要删除航线 @route.id 么？");'>
-                            <i class="icon-remove"></i> Delete
+                            <i class="icon-remove"></i>
                         </a>
                     </td>
                 </tr>
