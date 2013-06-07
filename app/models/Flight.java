@@ -29,11 +29,7 @@ public class Flight extends Model {
 
     @Constraints.Required
     @Formats.DateTime(pattern = "yyyy-MM-dd")
-    public Date departDate;
-
-    @Constraints.Required
-    @Formats.DateTime(pattern = "yyyy-MM-dd")
-    public Date arriveDate;
+    public Date date;
 
     public static Finder<Long, Flight> finder = new Finder<Long, Flight>(Long.class, Flight.class);
 }

@@ -33,8 +33,7 @@ create table flight (
   route_id                  bigint,
   airline_id                bigint,
   aircraft_id               bigint,
-  depart_date               datetime,
-  arrive_date               datetime,
+  date                      datetime,
   constraint pk_flight primary key (id))
 ;
 

@@ -7,7 +7,7 @@
     @commons.error()
     <div class="row-fluid">
         <div class="span6">
-            <h2>添加飞机</h2>
+            <h2>添加飞机信息</h2>
             @form(routes.AircraftController.save()) {
                 @inputText(aircraftForm("name"), '_label -> "名称", '_showConstraints -> false)
                 @inputText(aircraftForm("first"), '_label -> "头等舱容量", '_showConstraints -> false)

@@ -1,0 +1,36 @@
+@(flightForm : Form[Flight])
+
+@import helper._
+@import helper.twitterBootstrap._
+@import PlayMagic._
+
+@main("Flight System") {
+    @commons.error()
+    <div class="row-fluid">
+        <div class="span6">
+            <h2>添加航班信息</h2>
+            @form(routes.FlightController.save()) {
+                @select(flightForm("airline.id"), options(Airline.options()), '_label -> "航空公司",
+                    '_default -> "---- 请选择一个航空公司 ----", '_showConstraints -> false)
+                @select(flightForm("aircraft.id"), options(Aircraft.options()), '_label -> "飞机",
+                    '_default -> "---- 请选择一架飞机 ----", '_showConstraints -> false)
+                @select(flightForm("route.id"), options(Route.options()), '_label -> "航线",
+                    '_default -> "---- 请选择一个航线 ----", '_showConstraints -> false, 'style -> "width: auto;")
+                @input(flightForm("date"), '_label -> "航班日期", '_showConstraints -> false) { (id, name, value, args) =>
+                    <div class="controls input-append date-picker">
+                        <input type="text" id="@id" name="@name" value="@value" data-format="yyyy-MM-dd" @toHtmlArgs(args) />
+                        <span class="add-on">
+                            <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                            </i>
+                        </span>
+                    </div>
+                }
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">添加</button>
+                    <a href="@routes.FlightController.index()" class="btn">取消</a>
+                </div>
+            }
+        </div>
+        <div class="span6"></div>
+    </div>
+}

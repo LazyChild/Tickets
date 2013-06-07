@@ -6,7 +6,9 @@ import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Airline extends Model {
@@ -19,4 +21,13 @@ public class Airline extends Model {
     public String name;
 
     public static Finder<Long, Airline> finder = new Finder<Long, Airline>(Long.class, Airline.class);
+
+    public static Map<String, String> options() {
+        Map<String, String> options = new LinkedHashMap<String, String>();
+        List<Airline> airlines = Airline.finder.order("name").findList();
+        for (Airline airline : airlines) {
+            options.put(airline.id.toString(), airline.name);
+        }
+        return options;
+    }
 }

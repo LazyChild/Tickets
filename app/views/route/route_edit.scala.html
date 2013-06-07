@@ -2,12 +2,13 @@
 
 @import helper._
 @import helper.twitterBootstrap._
+@import PlayMagic._
 
 @main("Flight System") {
     @commons.error()
     <div class="row-fluid">
         <div class="span6">
-            <h2>编辑航线</h2>
+            <h2>编辑航线信息</h2>
             @form(routes.RouteController.update(routeForm.get.id)) {
                 @inputText(routeForm("id"), '_label -> "编号",  '_showConstraints -> false, 'readonly -> "readonly")
                 @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "出发机场")

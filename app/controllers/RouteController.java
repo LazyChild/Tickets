@@ -1,6 +1,5 @@
 package controllers;
 
-import models.Airport;
 import models.Route;
 import play.data.Form;
 import play.mvc.Controller;
@@ -43,7 +42,8 @@ public class RouteController extends Controller {
         Route route = validate(filledForm);
         if (route == null) {
             flash("error", "There were errors in the form.");
-            return badRequest(route_edit.render(filledForm));
+            route = Route.finder.byId(id);
+            return badRequest(route_edit.render(routeForm.fill(route)));
         }
         route.update();
         return redirect(routes.RouteController.index());

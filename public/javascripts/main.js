@@ -3,4 +3,7 @@ $(function() {
        pickSeconds: false,
        pickDate: false
    });
+   $(".date-picker").datetimepicker({
+      pickTime: false
+   });
 });

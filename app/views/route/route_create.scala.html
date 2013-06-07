@@ -8,7 +8,7 @@
     @commons.error()
     <div class="row-fluid">
         <div class="span6">
-            <h2>添加航线</h2>
+            <h2>添加航线信息</h2>
             @form(routes.RouteController.save()) {
                 @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "出发机场",
                     '_default -> "---- 请选择一个机场 ----")
