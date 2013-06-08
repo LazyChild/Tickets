@@ -24,24 +24,7 @@
             <div class="container-fluid">
                 <div class="row-fluid">
                     <div class="span3" id="left-nav">
-                        <ul class="nav nav-list">
-                            <li id="home"><a href="/">主页</a></li>
-                            @if(session.containsKey("email") && User.isAdmin(session.get("email"))) {
-                                <li class="divider"></li>
-                                <li class="nav-header">航班管理</li>
-                                <li id="airline"><a href="/airline">航空公司</a></li>
-                                <li id="airport"><a href="/airport">机场</a></li>
-                                <li id="route"><a href="/route">航线</a></li>
-                                <li id="aircraft"><a href="/aircraft">飞机</a></li>
-                                <li id="flight"><a href="/flight">航班</a></li>
-                            }
-                            @if(session.containsKey("email")) {
-                                <li class="divider"></li>
-                                <li class="nav-header">机票预定</li>
-                                <li id="customer"><a href="/customer">Customer</a></li>
-                                <li><a href="/booking">Booking</a></li>
-                            }
-                        </ul>
+                    @commons.navbar()
                     </div>
                     <div class="span8">
                     @content

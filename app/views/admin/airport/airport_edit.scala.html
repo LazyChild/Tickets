@@ -1,20 +1,21 @@
-@(airlineForm : Form[Airline])
+@(airportForm: Form[Airport])
 
+@import controllers.admin._
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
 
 @main("Flight System") {
     <div class="row-fluid">
         <div class="span6">
-            <h2>编辑航空公司信息</h2>
-            @form(routes.AirlineController.update()) {
+            <h2>编辑机场信息</h2>
+            @form(routes.AirportController.update()) {
                 <fieldset>
-                @inputText(airlineForm("id"), '_label -> "编号", '_showConstraints -> false, 'readonly -> "readonly")
-                @inputText(airlineForm("name"), '_label -> "名称", '_showConstraints -> false)
+                @inputText(airportForm("id"), '_label -> "编号",  '_showConstraints -> false, 'readonly -> "readonly")
+                @inputText(airportForm("name"), '_label -> "名称", '_showConstraints -> false)
                 </fieldset>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">编辑</button>
-                    <a href="@routes.AirlineController.index()" class="btn">取消</a>
+                    <a href="@routes.AirportController.index()" class="btn">取消</a>
                 </div>
             }
         </div>

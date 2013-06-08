@@ -1,6 +1,5 @@
 package controllers.admin;
 
-import controllers.routes;
 import models.Route;
 import play.data.Form;
 import play.mvc.Controller;
@@ -8,9 +7,9 @@ import play.mvc.Result;
 
 import play.mvc.Security;
 import play.mvc.With;
-import views.html.route.route_create;
-import views.html.route.route_edit;
-import views.html.route.route_index;
+import views.html.admin.route.route_create;
+import views.html.admin.route.route_edit;
+import views.html.admin.route.route_index;
 
 @Security.Authenticated(Secured.class)
 @With(AdminAction.class)

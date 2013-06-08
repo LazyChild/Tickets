@@ -2,6 +2,7 @@ package controllers;
 
 import models.User;
 import models.utils.Hash;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -24,6 +25,8 @@ public class Application extends Controller {
 
         @Constraints.Required
         public String password;
+
+        public String redirectUrl;
 
         public String validate() {
             if (User.authenticate(email, password) == null) {
@@ -62,6 +65,12 @@ public class Application extends Controller {
     }
 
     public static Result login() {
+        DynamicForm form = Form.form().bindFromRequest();
+        String redirectUrl = form.get("redirectUrl");
+        if (redirectUrl == null) {
+            redirectUrl = "/";
+        }
+        loginForm.data().put("redirectUrl", redirectUrl);
         return ok(login.render(loginForm));
     }
 
@@ -71,7 +80,7 @@ public class Application extends Controller {
             return badRequest(login.render(filledForm));
         }
         session("email", filledForm.get().email);
-        return redirect(routes.Application.index());
+        return redirect(filledForm.get().redirectUrl);
     }
 
     public static Result logout() {

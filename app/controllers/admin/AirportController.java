@@ -1,15 +1,14 @@
 package controllers.admin;
 
-import controllers.routes;
 import models.Airport;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import play.mvc.With;
-import views.html.airport.airport_create;
-import views.html.airport.airport_edit;
-import views.html.airport.airport_index;
+import views.html.admin.airport.airport_create;
+import views.html.admin.airport.airport_edit;
+import views.html.admin.airport.airport_index;
 
 @Security.Authenticated(Secured.class)
 @With(AdminAction.class)

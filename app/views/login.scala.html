@@ -16,6 +16,9 @@
                 <fieldset>
                 @inputText(loginForm("email"), '_label -> "登录邮箱", '_showConstraints -> false)
                 @inputPassword(loginForm("password"), '_label -> "密码", '_showConstraints -> false)
+                @defining(loginForm("redirectUrl")) { field =>
+                    <input type="hidden" value="@field.value" name="@field.name"/>
+                }
                 </fieldset>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">登录</button>
