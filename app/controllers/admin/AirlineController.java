@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin;
 
+import controllers.routes;
 import models.Airline;
 import play.data.Form;
 import play.mvc.Controller;

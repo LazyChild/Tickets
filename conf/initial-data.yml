@@ -1,3 +1,70 @@
 airlines:
   - !!models.Airline
-    name: 中国东方航空公司
+    name: 中国东方航空
+
+  - !!models.Airline
+    name: 中国南方航空
+
+  - !!models.Airline
+    name: 海南航空
+
+airports:
+  - !!models.Airport
+    name: 上海浦东国际机场
+
+  - !!models.Airport
+    name: 上海虹桥国际机场
+
+  - !!models.Airport
+    name: 青岛流亭国际机场
+
+  - !!models.Airport
+    name: 成都双流国际机场
+
+  - !!models.Airport
+    name: 北京首都国际机场
+
+aircrafts:
+  - !!models.Aircraft
+    name: 波音747
+    first: 20
+    economy: 400
+
+  - !!models.Aircraft
+    name: 波音737
+    first: 10
+    economy: 120
+
+routes:
+  - !!models.Route
+    departAirport:
+      !!models.Airport
+        id: 1
+    arriveAirport:
+      !!models.Airport
+        id: 3
+    departTime: '1970-01-01 12:30:00 +8'
+    arriveTime: '1970-01-01 16:30:00 +8'
+
+flights:
+  - !!models.Flight
+    date: '2013-06-21'
+    airline:
+      !!models.Airline
+        id: 1
+    route:
+      !!models.Route
+        id: 1
+
+users:
+  - !!models.User
+    email: admin@flight.com
+    passwordHash: $2a$10$HvOxE2B63bEKIuE84FMgOOAVLj0Xw91WDHXibNnw3totM2T3ri5uS
+    name: 李一帆
+    role: ADMIN
+
+  - !!models.User
+    email: user@flight.com
+    passwordHash: $2a$10$s0C4yJhpFJdP3iGbedhvfeFySIJjK9WsMU1rz6UEfg82dfXvn.osW
+    name: 刘仁宇
+    role: USER
