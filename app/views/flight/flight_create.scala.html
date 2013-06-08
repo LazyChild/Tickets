@@ -1,15 +1,15 @@
-@(flightForm : Form[Flight])
+@(flightForm: Form[Flight])
 
 @import helper._
-@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
 @import PlayMagic._
 
 @main("Flight System") {
-    @commons.error()
     <div class="row-fluid">
         <div class="span6">
             <h2>添加航班信息</h2>
             @form(routes.FlightController.save()) {
+                <fieldset>
                 @select(flightForm("airline.id"), options(Airline.options()), '_label -> "航空公司",
                     '_default -> "---- 请选择一个航空公司 ----", '_showConstraints -> false)
                 @select(flightForm("aircraft.id"), options(Aircraft.options()), '_label -> "飞机",
@@ -25,6 +25,7 @@
                         </span>
                     </div>
                 }
+                </fieldset>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">添加</button>
                     <a href="@routes.FlightController.index()" class="btn">取消</a>

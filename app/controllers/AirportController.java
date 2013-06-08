@@ -4,10 +4,14 @@ import models.Airport;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import play.mvc.With;
 import views.html.airport.airport_create;
 import views.html.airport.airport_edit;
 import views.html.airport.airport_index;
 
+@Security.Authenticated(Secured.class)
+@With(AdminAction.class)
 public class AirportController extends Controller {
 
     private static Form<Airport> airportForm = Form.form(Airport.class);
@@ -25,12 +29,10 @@ public class AirportController extends Controller {
         return ok(airport_edit.render(airportForm.fill(airport)));
     }
 
-    public static Result update(Long id) {
+    public static Result update() {
         Form<Airport> filledForm = airportForm.bindFromRequest();
         if (filledForm.hasErrors()) {
-            flash("error", "There were errors in the form");
-            Airport airport = Airport.finder.byId(id);
-            return ok(airport_edit.render(airportForm.fill(airport)));
+            return ok(airport_edit.render(filledForm));
         }
         filledForm.get().update();
         return redirect(routes.AirportController.index());

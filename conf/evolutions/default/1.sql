@@ -63,10 +63,11 @@ create table ticket (
 create table user (
   id                        bigint auto_increment not null,
   email                     varchar(255),
-  password                  varchar(255),
+  password_hash             varchar(255),
   name                      varchar(255),
   role                      integer,
   constraint ck_user_role check (role in (0,1)),
+  constraint uq_user_email unique (email),
   constraint pk_user primary key (id))
 ;
 

@@ -4,10 +4,14 @@ import models.Flight;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import play.mvc.With;
 import views.html.flight.flight_index;
 import views.html.flight.flight_create;
 import views.html.flight.flight_edit;
 
+@Security.Authenticated(Secured.class)
+@With(AdminAction.class)
 public class FlightController extends Controller {
 
     private static Form<Flight> flightForm = Form.form(Flight.class);
@@ -24,7 +28,6 @@ public class FlightController extends Controller {
         Form<Flight> filledForm = flightForm.bindFromRequest();
         Flight flight = validate(filledForm);
         if (flight == null) {
-            flash("error", "There were errors in the form.");
             return badRequest(flight_create.render(filledForm));
         }
         flight.save();
@@ -36,13 +39,11 @@ public class FlightController extends Controller {
         return ok(flight_edit.render(flightForm.fill(flight)));
     }
 
-    public static Result update(Long id) {
+    public static Result update() {
         Form<Flight> filledForm = flightForm.bindFromRequest();
         Flight flight = validate(filledForm);
         if (flight == null) {
-            flash("error", "There were errors in the form.");
-            flight = Flight.finder.byId(id);
-            return badRequest(flight_edit.render(flightForm.fill(flight)));
+            return badRequest(flight_edit.render(filledForm));
         }
         flight.update();
         return redirect(routes.FlightController.index());

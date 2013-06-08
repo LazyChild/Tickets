@@ -5,10 +5,14 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import play.mvc.Security;
+import play.mvc.With;
 import views.html.route.route_create;
 import views.html.route.route_edit;
 import views.html.route.route_index;
 
+@Security.Authenticated(Secured.class)
+@With(AdminAction.class)
 public class RouteController extends Controller {
 
     private static Form<Route> routeForm = Form.form(Route.class);
@@ -25,7 +29,6 @@ public class RouteController extends Controller {
         Form<Route> filledForm = routeForm.bindFromRequest();
         Route route = validate(filledForm);
         if (route == null) {
-            flash("error", "There were errors in the form.");
             return badRequest(route_create.render(filledForm));
         }
         route.save();
@@ -37,13 +40,11 @@ public class RouteController extends Controller {
         return ok(route_edit.render(routeForm.fill(route)));
     }
 
-    public static Result update(Long id) {
+    public static Result update() {
         Form<Route> filledForm = routeForm.bindFromRequest();
         Route route = validate(filledForm);
         if (route == null) {
-            flash("error", "There were errors in the form.");
-            route = Route.finder.byId(id);
-            return badRequest(route_edit.render(routeForm.fill(route)));
+            return badRequest(route_edit.render(filledForm));
         }
         route.update();
         return redirect(routes.RouteController.index());

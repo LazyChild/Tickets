@@ -1,8 +1,5 @@
-@(tickets: List[Ticket], ticketForm: Form[Ticket])
+@(title: String)
 
-@import  helper._
-@import helper.twitterBootstrap._
-
-@main("Welcome to tickets booking system.") {
-    <h1>@tickets.size ticket(s)</h1>
+@main("Welcome to Flight System.") {
+    <h1>@title</h1>
 }

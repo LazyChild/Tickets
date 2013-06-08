@@ -4,10 +4,14 @@ import models.Airline;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import play.mvc.With;
 import views.html.airline.airline_index;
 import views.html.airline.airline_create;
 import views.html.airline.airline_edit;
 
+@Security.Authenticated(Secured.class)
+@With(AdminAction.class)
 public class AirlineController extends Controller {
 
     private static Form<Airline> airlineForm = Form.form(Airline.class);
@@ -25,12 +29,10 @@ public class AirlineController extends Controller {
         return ok(airline_edit.render(airlineForm.fill(airline)));
     }
 
-    public static Result update(Long id) {
+    public static Result update() {
         Form<Airline> filledForm = airlineForm.bindFromRequest();
         if (filledForm.hasErrors()) {
-            flash("error", "There were errors in the form");
-            Airline airline = Airline.finder.byId(id);
-            return ok(airline_edit.render(airlineForm.fill(airline)));
+            return ok(airline_edit.render(filledForm));
         }
         filledForm.get().update();
         return redirect(routes.AirlineController.index());
@@ -39,7 +41,6 @@ public class AirlineController extends Controller {
     public static Result save() {
         Form<Airline> filledForm = airlineForm.bindFromRequest();
         if (filledForm.hasErrors()) {
-            flash("error", "There were errors in the form.");
             return ok(airline_create.render(filledForm));
         }
         filledForm.get().save();

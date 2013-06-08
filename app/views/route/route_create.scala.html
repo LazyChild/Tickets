@@ -1,20 +1,19 @@
 @(routeForm : Form[Route])
 
 @import helper._
-@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
 @import PlayMagic._
 
 @main("Flight System") {
-    @commons.error()
     <div class="row-fluid">
         <div class="span6">
             <h2>添加航线信息</h2>
             @form(routes.RouteController.save()) {
+                <fieldset>
                 @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "出发机场",
                     '_default -> "---- 请选择一个机场 ----")
                 @select(routeForm("arriveAirport.id"), options(Airport.options()), '_label -> "到达机场",
                     '_default -> "---- 请选择一个机场 ----")
-
                 @input(routeForm("departTime"), '_label -> "出发时间", '_showConstraints -> false) { (id, name, value, args) =>
                     <div class="controls input-append time-picker">
                         <input type="text" id="@id" name="@name" value="@value" data-format="hh:mm" @toHtmlArgs(args) />
@@ -33,6 +32,7 @@
                         </span>
                     </div>
                 }
+                </fieldset>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">添加</button>
                     <a href="@routes.RouteController.index()" class="btn">取消</a>

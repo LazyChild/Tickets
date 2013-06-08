@@ -1,0 +1,28 @@
+@(loginForm: Form[Application.Login])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
+
+@main("Welcome to Flight System.") {
+    <div class="row-fluid">
+        <div class="span6">
+            <h2>登录</h2>
+            @form(routes.Application.authenticate()) {
+                @if(loginForm.hasGlobalErrors) {
+                    <p class="alert alert-error">
+                        @loginForm.globalError.message
+                    </p>
+                }
+                <fieldset>
+                @inputText(loginForm("email"), '_label -> "登录邮箱", '_showConstraints -> false)
+                @inputPassword(loginForm("password"), '_label -> "密码", '_showConstraints -> false)
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">登录</button>
+                    <a href="@routes.Application.index()" class="btn">取消</a>
+                </div>
+            }
+        </div>
+        <div class="span6"></div>
+    </div>
+}

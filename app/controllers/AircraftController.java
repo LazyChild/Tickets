@@ -4,10 +4,14 @@ import models.Aircraft;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
+import play.mvc.With;
 import views.html.aircraft.aircraft_create;
 import views.html.aircraft.aircraft_edit;
 import views.html.aircraft.aircraft_index;
 
+@Security.Authenticated(Secured.class)
+@With(AdminAction.class)
 public class AircraftController extends Controller {
 
     private static Form<Aircraft> aircraftForm = Form.form(Aircraft.class);
@@ -23,7 +27,6 @@ public class AircraftController extends Controller {
     public static Result save() {
         Form<Aircraft> filledForm = aircraftForm.bindFromRequest();
         if (filledForm.hasErrors()) {
-            flash("error", "There were errors in the form.");
             return badRequest(aircraft_create.render(filledForm));
         }
         filledForm.get().save();
@@ -35,10 +38,9 @@ public class AircraftController extends Controller {
         return ok(aircraft_edit.render(aircraftForm.fill(aircraft)));
     }
 
-    public static Result update(Long id) {
+    public static Result update() {
         Form<Aircraft> filledForm = aircraftForm.bindFromRequest();
         if (filledForm.hasErrors()) {
-            flash("error", "There were errors in the form.");
             return badRequest(aircraft_edit.render(filledForm));
         }
         filledForm.get().update();

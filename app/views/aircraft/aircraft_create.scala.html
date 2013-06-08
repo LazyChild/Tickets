@@ -1,17 +1,18 @@
 @(aircraftForm : Form[Aircraft])
 
 @import helper._
-@import helper.twitterBootstrap._
+@implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
 
 @main("Flight System") {
-    @commons.error()
     <div class="row-fluid">
         <div class="span6">
             <h2>添加飞机信息</h2>
             @form(routes.AircraftController.save()) {
+                <fieldset>
                 @inputText(aircraftForm("name"), '_label -> "名称", '_showConstraints -> false)
                 @inputText(aircraftForm("first"), '_label -> "头等舱容量", '_showConstraints -> false)
                 @inputText(aircraftForm("economy"), '_label -> "经济舱容量", '_showConstraints -> false)
+                </fieldset>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">添加</button>
                     <a href="@routes.AircraftController.index()" class="btn">取消</a>

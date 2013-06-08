@@ -5,40 +5,46 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+GET     /login                      controllers.Application.login()
+POST    /login                      controllers.Application.authenticate()
+GET     /logout                     controllers.Application.logout()
+GET     /register                   controllers.Application.register()
+POST    /register                   controllers.Application.saveUser()
+
 GET     /airline                    controllers.AirlineController.index()
 GET     /airline/create             controllers.AirlineController.create()
 POST    /airline/save               controllers.AirlineController.save()
 GET     /airline/:id/delete         controllers.AirlineController.delete(id: Long)
 GET     /airline/:id/edit           controllers.AirlineController.edit(id: Long)
-POST    /airline/:id/update         controllers.AirlineController.update(id: Long)
+POST    /airline/update             controllers.AirlineController.update()
 
 GET     /airport                    controllers.AirportController.index()
 GET     /airport/create             controllers.AirportController.create()
 POST    /airport/save               controllers.AirportController.save()
 GET     /airport/:id/delete         controllers.AirportController.delete(id: Long)
 GET     /airport/:id/edit           controllers.AirportController.edit(id: Long)
-POST    /airport/:id/update         controllers.AirportController.update(id: Long)
+POST    /airport/update             controllers.AirportController.update()
 
 GET     /route                      controllers.RouteController.index()
 GET     /route/create               controllers.RouteController.create()
 POST    /route/save                 controllers.RouteController.save()
 GET     /route/:id/delete           controllers.RouteController.delete(id: Long)
 GET     /route/:id/edit             controllers.RouteController.edit(id: Long)
-POST    /route/:id/update           controllers.RouteController.update(id: Long)
+POST    /route/update               controllers.RouteController.update()
 
 GET     /aircraft                   controllers.AircraftController.index()
 GET     /aircraft/create            controllers.AircraftController.create()
 POST    /aircraft/save              controllers.AircraftController.save()
 GET     /aircraft/:id/delete        controllers.AircraftController.delete(id: Long)
 GET     /aircraft/:id/edit          controllers.AircraftController.edit(id: Long)
-POST    /aircraft/:id/update        controllers.AircraftController.update(id: Long)
+POST    /aircraft/update            controllers.AircraftController.update()
 
 GET     /flight                     controllers.FlightController.index()
 GET     /flight/create              controllers.FlightController.create()
 POST    /flight/save                controllers.FlightController.save()
 GET     /flight/:id/delete          controllers.FlightController.delete(id: Long)
 GET     /flight/:id/edit            controllers.FlightController.edit(id: Long)
-POST    /flight/:id/update          controllers.FlightController.update(id: Long)
+POST    /flight/update              controllers.FlightController.update()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
