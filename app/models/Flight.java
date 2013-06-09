@@ -39,5 +39,18 @@ public class Flight extends Model {
     @Constraints.Min(0)
     public Integer economyPrice;
 
+    public String validate() {
+        if (aircraft == null || aircraft.id == null) {
+            return "请指定一架飞机";
+        }
+        if (airline == null || airline.id == null) {
+            return "请指定一家航空公司";
+        }
+        if (route == null || route.id == null) {
+            return "请指定一条航线";
+        }
+        return null;
+    }
+
     public static Finder<Long, Flight> finder = new Finder<Long, Flight>(Long.class, Flight.class);
 }

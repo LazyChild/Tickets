@@ -1,0 +1,27 @@
+@(tickets: List[Ticket])
+
+@main("Flight System") {
+    <h2>乘客信息</h2>
+    <table class="table table-striped index-table" id="data-table">
+        <tbody>
+            <tr>
+                <th>乘客姓名</th>
+                <th>身份证号</th>
+                <th>舱位等级</th>
+            </tr>
+            @for(ticket <- tickets) {
+                <tr>
+                    <td>@ticket.passenger.name</td>
+                    <td>@ticket.passenger.identify</td>
+                    <td>
+                        @if(ticket.firstClass) {
+                            头等舱
+                        } else {
+                            经济舱
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

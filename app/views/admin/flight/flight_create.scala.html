@@ -9,6 +9,11 @@
         <div class="span6">
             <h2>添加航班信息</h2>
             @form(routes.FlightController.save()) {
+                @if(flightForm.hasGlobalErrors) {
+                    <p class="alert alert-error">
+                    @flightForm.globalError.message
+                    </p>
+                }
                 <fieldset>
                 @select(flightForm("airline.id"), options(Airline.options()), '_label -> "航空公司",
                     '_default -> "---- 请选择一个航空公司 ----", '_showConstraints -> false)

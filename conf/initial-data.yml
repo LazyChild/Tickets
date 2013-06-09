@@ -70,11 +70,9 @@ users:
   - !!models.User
     email: admin@flight.com
     passwordHash: $2a$10$HvOxE2B63bEKIuE84FMgOOAVLj0Xw91WDHXibNnw3totM2T3ri5uS
-    name: 李一帆
     role: ADMIN
 
   - !!models.User
     email: user@flight.com
     passwordHash: $2a$10$s0C4yJhpFJdP3iGbedhvfeFySIJjK9WsMU1rz6UEfg82dfXvn.osW
-    name: 刘仁宇
     role: USER

@@ -27,11 +27,10 @@ public class RouteController extends Controller {
 
     public static Result save() {
         Form<Route> filledForm = routeForm.bindFromRequest();
-        Route route = validate(filledForm);
-        if (route == null) {
+        if (filledForm.hasErrors()) {
             return badRequest(route_create.render(filledForm));
         }
-        route.save();
+        filledForm.get().save();
         return redirect(routes.RouteController.index());
     }
 
@@ -42,27 +41,15 @@ public class RouteController extends Controller {
 
     public static Result update() {
         Form<Route> filledForm = routeForm.bindFromRequest();
-        Route route = validate(filledForm);
-        if (route == null) {
+        if (filledForm.hasErrors()) {
             return badRequest(route_edit.render(filledForm));
         }
-        route.update();
+        filledForm.get().update();
         return redirect(routes.RouteController.index());
     }
 
     public static Result delete(Long id) {
         Route.finder.ref(id).delete();
         return redirect(routes.RouteController.index());
-    }
-
-    private static Route validate(Form<Route> form) {
-        if (form.hasErrors()) {
-            return null;
-        }
-        Route route = form.get();
-        if (route.arriveAirport.id == null || route.departAirport.id == null) {
-            return null;
-        }
-        return route;
     }
 }

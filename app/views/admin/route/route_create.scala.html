@@ -9,6 +9,11 @@
         <div class="span6">
             <h2>添加航线信息</h2>
             @form(routes.RouteController.save()) {
+                @if(routeForm.hasGlobalErrors) {
+                    <p class="alert alert-error">
+                    @routeForm.globalError.message
+                    </p>
+                }
                 <fieldset>
                 @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "起飞机场",
                     '_default -> "---- 请选择一个机场 ----")

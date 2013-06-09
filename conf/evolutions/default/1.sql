@@ -71,7 +71,6 @@ create table ticket (
 create table user (
   email                     varchar(255) not null,
   password_hash             varchar(255),
-  name                      varchar(255),
   role                      integer,
   constraint ck_user_role check (role in (0,1)),
   constraint pk_user primary key (email))

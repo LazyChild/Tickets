@@ -45,6 +45,7 @@ POST    /flight/save                controllers.admin.FlightController.save()
 GET     /flight/:id/delete          controllers.admin.FlightController.delete(id: Long)
 GET     /flight/:id/edit            controllers.admin.FlightController.edit(id: Long)
 POST    /flight/update              controllers.admin.FlightController.update()
+GET     /flight/:id/view            controllers.admin.FlightController.view(id: Long)
 
 GET     /search                     controllers.booking.SearchController.index()
 POST    /search                     controllers.booking.SearchController.search()
@@ -53,6 +54,7 @@ GET     /booking/:id                controllers.booking.BookController.bookForm(
 POST    /booking/:id                controllers.booking.BookController.book(id: Long)
 GET     /order                      controllers.booking.BookController.index()
 GET     /booking/:id/pay            controllers.booking.BookController.pay(id: Long)
+GET     /booking/:id/delete         controllers.booking.BookController.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

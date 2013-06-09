@@ -1,6 +1,7 @@
 package controllers.admin;
 
 import models.Flight;
+import models.Ticket;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -9,6 +10,9 @@ import play.mvc.With;
 import views.html.admin.flight.flight_create;
 import views.html.admin.flight.flight_edit;
 import views.html.admin.flight.flight_index;
+import views.html.admin.flight.flight_view;
+
+import java.util.List;
 
 @Security.Authenticated(Secured.class)
 @With(AdminAction.class)
@@ -26,11 +30,10 @@ public class FlightController extends Controller {
 
     public static Result save() {
         Form<Flight> filledForm = flightForm.bindFromRequest();
-        Flight flight = validate(filledForm);
-        if (flight == null) {
+        if (filledForm.hasErrors()) {
             return badRequest(flight_create.render(filledForm));
         }
-        flight.save();
+        filledForm.get().save();
         return redirect(routes.FlightController.index());
     }
 
@@ -41,11 +44,10 @@ public class FlightController extends Controller {
 
     public static Result update() {
         Form<Flight> filledForm = flightForm.bindFromRequest();
-        Flight flight = validate(filledForm);
-        if (flight == null) {
+        if (filledForm.hasErrors()) {
             return badRequest(flight_edit.render(filledForm));
         }
-        flight.update();
+        filledForm.get().update();
         return redirect(routes.FlightController.index());
     }
 
@@ -54,14 +56,8 @@ public class FlightController extends Controller {
         return redirect(routes.FlightController.index());
     }
 
-    private static Flight validate(Form<Flight> form) {
-        if (form.hasErrors()) {
-            return null;
-        }
-        Flight flight = form.get();
-        if (flight.aircraft.id == null || flight.airline.id == null || flight.route.id == null) {
-            return null;
-        }
-        return flight;
+    public static Result view(Long id) {
+        List<Ticket> tickets = Ticket.finder.where().eq("flight.id", id).findList();
+        return ok(flight_view.render(tickets));
     }
 }

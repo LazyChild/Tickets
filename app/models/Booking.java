@@ -12,7 +12,7 @@ public class Booking extends Model {
     @Id
     public Long id;
 
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.REMOVE)
     public List<Ticket> tickets;
 
     @ManyToOne
@@ -36,6 +36,15 @@ public class Booking extends Model {
             }
             if (ticket.passenger.name.trim().length() == 0) {
                 return "乘客姓名不能为空！";
+            }
+        }
+        for (int i = 0; i < tickets.size(); ++i) {
+            String id1 = tickets.get(i).passenger.identify;
+            for (int j = i + 1; j < tickets.size(); ++j) {
+                String id2 = tickets.get(j).passenger.identify;
+                if (id1.equals(id2)) {
+                    return "请勿添加重复的乘客！";
+                }
             }
         }
         return null;

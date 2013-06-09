@@ -35,6 +35,19 @@ public class Route extends Model {
     @Formats.DateTime(pattern = "HH:mm")
     public Date arriveTime;
 
+    public String validate() {
+        if (departAirport == null || departAirport.id == null) {
+            return "请指定一个起飞机场";
+        }
+        if (arriveAirport == null || arriveAirport.id == null) {
+            return "请指定一个降落机场";
+        }
+        if (arriveTime.before(departTime)) {
+            return "降落时间不应早于起飞时间";
+        }
+        return null;
+    }
+
     public static Finder<Long, Route> finder = new Finder<Long, Route>(Long.class, Route.class);
 
     private static SimpleDateFormat format = new SimpleDateFormat("HH:mm");

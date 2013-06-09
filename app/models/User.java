@@ -1,11 +1,8 @@
 package models;
 
 import models.utils.Hash;
-import play.data.format.Formats;
-import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -16,8 +13,6 @@ public class User extends Model {
     public String email;
 
     public String passwordHash;
-
-    public String name;
 
     public Role role = Role.USER;
 

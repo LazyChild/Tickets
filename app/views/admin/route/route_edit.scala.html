@@ -9,6 +9,11 @@
         <div class="span6">
             <h2>编辑航线信息</h2>
             @form(routes.RouteController.update()) {
+                @if(routeForm.hasGlobalErrors) {
+                    <p class="alert alert-error">
+                    @routeForm.globalError.message
+                    </p>
+                }
                 <fieldset>
                 @inputText(routeForm("id"), '_label -> "编号",  '_showConstraints -> false, 'readonly -> "readonly")
                 @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "起飞机场")

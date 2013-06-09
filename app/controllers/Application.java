@@ -6,7 +6,6 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.data.format.Formats;
 import play.data.validation.Constraints;
-import play.libs.Crypto;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
@@ -48,10 +47,6 @@ public class Application extends Controller {
         @Formats.NonEmpty
         public String repeatPassword;
 
-        @Constraints.Required
-        @Formats.NonEmpty
-        public String name;
-
         public String validate() {
             if (!password.equals(repeatPassword)) {
                 return "两次密码不匹配！";
@@ -61,7 +56,7 @@ public class Application extends Controller {
     }
 
     public static Result index() {
-        return ok(index.render("Hello world!"));
+        return ok(index.render());
     }
 
     public static Result login() {
@@ -101,7 +96,6 @@ public class Application extends Controller {
         Register register = filledForm.get();
         user.email = register.email;
         user.passwordHash = Hash.createPassword(register.password);
-        user.name = register.name;
         user.save();
         return redirect(routes.Application.login());
     }

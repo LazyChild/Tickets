@@ -3,7 +3,6 @@ package controllers.booking;
 import controllers.admin.Secured;
 import models.Booking;
 import models.Flight;
-import models.Status;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -43,6 +42,11 @@ public class BookController extends Controller {
         Booking booking = Booking.finder.byId(id);
         booking.status = models.Status.PAID;
         booking.update();
+        return redirect(routes.BookController.index());
+    }
+
+    public static Result delete(Long id) {
+        Booking.finder.ref(id).delete();
         return redirect(routes.BookController.index());
     }
 }

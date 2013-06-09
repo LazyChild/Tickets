@@ -20,6 +20,10 @@
                         <a href="@routes.BookController.pay(booking.id)">
                             <i class="icon-ok"></i> 付款
                         </a>
+                        &nbsp;
+                        <a href="@routes.BookController.delete(booking.id)">
+                            <i class="icon-remove"></i> 取消
+                        </a>
                     } else {
                         <i class="icon-ok"></i> 已付款
                     }

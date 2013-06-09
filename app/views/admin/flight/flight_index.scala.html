@@ -27,7 +27,11 @@
                     <td>@flight.aircraft.name</td>
                     <td>￥@flight.firstPrice</td>
                     <td>￥@flight.economyPrice</td>
-                    <td><i class="icon-search"></i></td>
+                    <td>
+                        <a href="@routes.FlightController.view(flight.id)">
+                            <i class="icon-search"></i>
+                        </a>
+                    </td>
                     <td>
                         <a href="@routes.FlightController.edit(flight.id)">
                             <i class="icon-pencil"></i>
