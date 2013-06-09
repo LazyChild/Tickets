@@ -3,7 +3,6 @@
 @import controllers.admin._
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
-@import PlayMagic._
 
 @main("Flight System") {
     <div class="row-fluid">
@@ -19,13 +18,15 @@
                     '_default -> "---- 请选择一个航线 ----", '_showConstraints -> false, 'style -> "width: auto;")
                 @input(flightForm("date"), '_label -> "航班日期", '_showConstraints -> false) { (id, name, value, args) =>
                     <div class="controls input-append date-picker">
-                        <input type="text" id="@id" name="@name" value="@value" data-format="yyyy-MM-dd" @toHtmlArgs(args) />
+                        <input type="text" id="@id" name="@name" value="@value" data-format="yyyy-MM-dd" />
                         <span class="add-on">
                             <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                             </i>
                         </span>
                     </div>
                 }
+                @inputText(flightForm("firstPrice"), '_label -> "头等舱价格", '_showConstraints -> false)
+                @inputText(flightForm("economyPrice"), '_label -> "经济舱价格", '_showConstraints -> false)
                 </fieldset>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">添加</button>

@@ -1,0 +1,32 @@
+@(searchForm: Form[controllers.booking.SearchController.Search])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
+@import controllers.booking._
+
+@main("Flight System") {
+    <div class="row-fluid">
+        <div class="span6">
+            <h2>查找航班</h2>
+            @form(routes.SearchController.search()) {
+                <fieldset>
+                    @inputText(searchForm("departCity"), '_label -> "出发城市", '_showConstraints -> false)
+                    @inputText(searchForm("arriveCity"), '_label -> "到达城市", '_showConstraints -> false)
+                    @input(searchForm("date"), '_label -> "日期", '_showConstraints -> false) { (id, name, value, args) =>
+                        <div class="controls input-append date-picker">
+                            <input type="text" id="@id" name="@name" value="@value" data-format="yyyy-MM-dd" />
+                            <span class="add-on">
+                                <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                </i>
+                            </span>
+                        </div>
+                    }
+                </fieldset>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">查找</button>
+                </div>
+            }
+        </div>
+        <div class="span6"></div>
+    </div>
+}

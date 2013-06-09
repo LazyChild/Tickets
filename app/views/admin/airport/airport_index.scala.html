@@ -13,11 +13,12 @@
     </div>
     <table class="table table-striped index-table" id="data-table">
         <tbody>
-            <th>编号</th><th>机场</th><th></th><th></th>
+            <th>编号</th><th>名称</th><th>城市</th><th></th><th></th>
             @for(airport <- airports) {
                 <tr>
                     <td>@airport.id</td>
                     <td>@airport.name</td>
+                    <td>@airport.city</td>
                     <td>
                         <a href="@routes.AirportController.edit(airport.id)">
                             <i class="icon-pencil"></i>

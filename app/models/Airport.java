@@ -4,6 +4,7 @@ import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.LinkedHashMap;
@@ -18,7 +19,12 @@ public class Airport extends Model {
 
     @Constraints.Required
     @Formats.NonEmpty
+    @Column(unique = true)
     public String name;
+
+    @Constraints.Required
+    @Formats.NonEmpty
+    public String city;
 
     public static Finder<Long, Airport> finder = new Finder<Long, Airport>(Long.class, Airport.class);
 

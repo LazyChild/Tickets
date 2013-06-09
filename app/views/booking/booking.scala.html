@@ -1,0 +1,57 @@
+@(flight: Flight, bookingForm: Form[Booking])
+
+@import controllers.booking._
+@import helper._
+
+@main("Flight System") {
+    @if(bookingForm.hasGlobalErrors) {
+        <p class="alert alert-error">
+        @bookingForm.globalError.message
+        </p>
+    }
+    <h2>机票预定</h2>
+    <table class="table table-striped">
+        <tbody>
+            <th>编号</th><th>航空公司</th><th>航班日期</th><th>出发机场</th><th>到达机场</th><th>出发时间</th><th>到达时间</th><th>机型</th>
+            <tr>
+                <td>@flight.airline.name</td>
+                <td>@flight.id</td>
+                <td>@flight.date.format("yyyy-MM-dd")</td>
+                <td>@flight.route.departAirport.name</td>
+                <td>@flight.route.arriveAirport.name</td>
+                <td>@flight.route.departTime.format("HH:mm")</td>
+                <td>@flight.route.arriveTime.format("HH:mm")</td>
+                <td>@flight.aircraft.name</td>
+            </tr>
+        </tbody>
+    </table>
+    @form(routes.BookController.book(flight.id)) {
+        <input type="hidden" name="customer.email" value="@session.get("email")"/>
+        <table class="table table-striped index-table" id="passenger-table">
+            <tbody>
+                <tr>
+                    <th>乘客姓名</th>
+                    <th>身份证号</th>
+                    <th>舱位等级</th>
+                    <th><a class="btn" id="add-passenger"><i class="icon-plus-sign"></i> 添加</a></th>
+                </tr>
+
+                <tr>
+                    <input type="hidden" name="tickets[0].flight.id" value="@flight.id"/>
+                    <td><input type="text" class="input-small" name="tickets[0].passenger.name"/></td>
+                    <td><input type="text" class="input-large" name="tickets[0].passenger.identify"/></td>
+                    <td>
+                        <select class="input-medium" name="tickets[0].firstClass">
+                            <option value="0">经济舱 ￥@flight.economyPrice</option>
+                            <option value="1">头等舱 ￥@flight.firstPrice</option>
+                        </select>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary pull-right">购买</button>
+        </div>
+    }
+}

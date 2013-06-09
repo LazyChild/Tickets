@@ -13,7 +13,8 @@
     </div>
     <table class="table table-striped index-table" id="data-table">
         <tbody>
-            <th>编号</th><th>航空公司</th><th>航班日期</th><th>出发机场</th><th>到达机场</th><th>出发时间</th><th>到达时间</th><th></th><th></th>
+            <th>编号</th><th>航空公司</th><th>航班日期</th><th>起飞机场</th><th>降落机场</th><th>起飞时间</th><th>降落时间</th><th>机型</th><th>头等舱价格</th><th>经济舱价格</th><th></th><th>
+        </th><th></th>
             @for(flight <- flights) {
                 <tr>
                     <td>@flight.id</td>
@@ -23,6 +24,10 @@
                     <td>@flight.route.arriveAirport.name</td>
                     <td>@flight.route.departTime.format("HH:mm")</td>
                     <td>@flight.route.arriveTime.format("HH:mm")</td>
+                    <td>@flight.aircraft.name</td>
+                    <td>￥@flight.firstPrice</td>
+                    <td>￥@flight.economyPrice</td>
+                    <td><i class="icon-search"></i></td>
                     <td>
                         <a href="@routes.FlightController.edit(flight.id)">
                             <i class="icon-pencil"></i>

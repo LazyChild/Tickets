@@ -1,12 +1,10 @@
 package models;
 
-import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.util.List;
 
 @Entity
 public class Ticket extends Model {
@@ -15,12 +13,26 @@ public class Ticket extends Model {
     public Long id;
 
     @ManyToOne
-    @Constraints.Required
+    public Booking booking;
+
+    @ManyToOne
     public Flight flight;
 
     @ManyToOne
-    @Constraints.Required
     public Passenger passenger;
 
+    public Boolean firstClass;
+
+    public Integer getPrice() {
+        return firstClass ? flight.firstPrice : flight.economyPrice;
+    }
+
     public static Finder<Long, Ticket> finder = new Finder<Long, Ticket>(Long.class, Ticket.class);
+
+    public static void create(Ticket ticket) {
+        if (Passenger.finder.byId(ticket.passenger.identify) == null) {
+            ticket.passenger.save();
+        }
+        ticket.save();
+    }
 }

@@ -31,5 +31,13 @@ public class Flight extends Model {
     @Formats.DateTime(pattern = "yyyy-MM-dd")
     public Date date;
 
+    @Constraints.Required
+    @Constraints.Min(0)
+    public Integer firstPrice;
+
+    @Constraints.Required
+    @Constraints.Min(0)
+    public Integer economyPrice;
+
     public static Finder<Long, Flight> finder = new Finder<Long, Flight>(Long.class, Flight.class);
 }

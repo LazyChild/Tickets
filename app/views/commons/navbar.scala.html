@@ -1,21 +1,27 @@
 @()
-@import controllers.admin._
 
 <ul class="nav nav-list">
-    <li id="home"><a href="/">主页</a></li>
+    <li class="nav-header">用户</li>
+    @if(session.containsKey("email")) {
+        <li>个人中心</li>
+        <li><a href="@routes.Application.logout()">登出</a></li>
+    } else {
+        <li><a href="@routes.Application.login()">登录</a></li>
+        <li><a href="@routes.Application.register()">注册</a></li>
+    }
+    <li class="divider"></li>
+    <li class="nav-header">机票预定</li>
+    <li><a href="@controllers.booking.routes.SearchController.index()">航班查询</a></li>
+    @if(session.containsKey("email")) {
+        <li><a href="@controllers.booking.routes.BookController.index()">订单管理</a></li>
+    }
     @if(session.containsKey("email") && User.isAdmin(session.get("email"))) {
         <li class="divider"></li>
         <li class="nav-header">航班管理</li>
-        <li><a href="@routes.AirlineController.index()">航空公司</a></li>
-        <li><a href="@routes.AirportController.index()">机场</a></li>
-        <li><a href="@routes.FlightController.index()">飞机</a></li>
-        <li><a href="@routes.RouteController.index()">航线</a></li>
-        <li><a href="/flight">航班</a></li>
-    }
-    @if(session.containsKey("email")) {
-        <li class="divider"></li>
-        <li class="nav-header">机票预定</li>
-        <li><a href="/customer">Customer</a></li>
-        <li><a href="/booking">Booking</a></li>
+        <li><a href="@controllers.admin.routes.AirlineController.index()">航空公司</a></li>
+        <li><a href="@controllers.admin.routes.AirportController.index()">机场</a></li>
+        <li><a href="@controllers.admin.routes.FlightController.index()">飞机</a></li>
+        <li><a href="@controllers.admin.routes.RouteController.index()">航线</a></li>
+        <li><a href="@controllers.admin.routes.FlightController.index()">航班</a></li>
     }
 </ul>

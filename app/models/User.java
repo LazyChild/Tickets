@@ -13,9 +13,6 @@ import javax.persistence.Id;
 public class User extends Model {
 
     @Id
-    public Long id;
-
-    @Column(unique = true)
     public String email;
 
     public String passwordHash;
@@ -24,10 +21,10 @@ public class User extends Model {
 
     public Role role = Role.USER;
 
-    public static Finder<Long, User> finder = new Finder<Long, User>(Long.class, User.class);
+    public static Finder<String, User> finder = new Finder<String, User>(String.class, User.class);
 
     public static User authenticate(String email, String password) {
-        User user = finder.where().eq("email", email).findUnique();
+        User user = finder.byId(email);
         if (user != null) {
             if (Hash.checkPassword(password, user.passwordHash)) {
                 return user;

@@ -11,6 +11,7 @@
             @form(routes.AirportController.save()) {
                 <fieldset>
                 @inputText(airportForm("name"), '_label -> "名称", '_showConstraints -> false)
+                @inputText(airportForm("name"), '_label -> "城市", '_showConstraints -> false)
                 </fieldset>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">添加</button>

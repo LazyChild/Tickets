@@ -11,18 +11,23 @@ airlines:
 airports:
   - !!models.Airport
     name: 上海浦东国际机场
+    city: 上海
 
   - !!models.Airport
     name: 上海虹桥国际机场
+    city: 上海
 
   - !!models.Airport
     name: 青岛流亭国际机场
+    city: 青岛
 
   - !!models.Airport
     name: 成都双流国际机场
+    city: 成都
 
   - !!models.Airport
     name: 北京首都国际机场
+    city: 北京
 
 aircrafts:
   - !!models.Aircraft
@@ -55,6 +60,11 @@ flights:
     route:
       !!models.Route
         id: 1
+    firstPrice: 1300
+    economyPrice: 740
+    aircraft:
+      !!models.Aircraft
+      id: 1
 
 users:
   - !!models.User

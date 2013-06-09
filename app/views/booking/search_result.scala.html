@@ -1,0 +1,35 @@
+@(flights: List[Flight], searchForm: Form[controllers.booking.SearchController.Search])
+
+@import controllers.booking._
+
+@main("Flight System") {
+    <div id="search">
+        <div class="span12">
+            <p class="lead"><strong>@searchForm.get.date.format("yyyy-MM-dd")</strong>日之后，从<strong>@searchForm.get.departCity</strong>飞往<strong>@searchForm.get.arriveCity</strong>的航班：</p>
+        </div>
+    </div>
+    <table class="table table-striped index-table" id="data-table">
+        <tbody>
+            <th>编号</th><th>航空公司</th><th>航班日期</th><th>起飞机场</th><th>降落机场</th><th>起飞时间</th><th>降落时间</th><th>机型</th><th>头等舱价格</th><th>经济舱价格</th><th></th>
+            @for(flight <- flights) {
+                <tr>
+                    <td>@flight.id</td>
+                    <td>@flight.airline.name</td>
+                    <td>@flight.date.format("yyyy-MM-dd")</td>
+                    <td>@flight.route.departAirport.name</td>
+                    <td>@flight.route.arriveAirport.name</td>
+                    <td>@flight.route.departTime.format("HH:mm")</td>
+                    <td>@flight.route.arriveTime.format("HH:mm")</td>
+                    <td>@flight.aircraft.name</td>
+                    <td>￥@flight.firstPrice</td>
+                    <td>￥@flight.economyPrice</td>
+                    <td>
+                        <a href="@routes.BookController.book(flight.id)">
+                            <i class="icon-ok"></i> 购买
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

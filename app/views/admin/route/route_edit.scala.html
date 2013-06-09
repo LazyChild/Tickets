@@ -3,7 +3,6 @@
 @import controllers.admin._
 @import helper._
 @implicitFieldConstructor = @{ FieldConstructor(commons.twitterBootstrapInput.render) }
-@import PlayMagic._
 
 @main("Flight System") {
     <div class="row-fluid">
@@ -12,20 +11,20 @@
             @form(routes.RouteController.update()) {
                 <fieldset>
                 @inputText(routeForm("id"), '_label -> "编号",  '_showConstraints -> false, 'readonly -> "readonly")
-                @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "出发机场")
-                @select(routeForm("arriveAirport.id"), options(Airport.options()), '_label -> "到达机场")
-                @input(routeForm("departTime"), '_label -> "出发时间", '_showConstraints -> false) { (id, name, value, args) =>
+                @select(routeForm("departAirport.id"), options(Airport.options()), '_label -> "起飞机场")
+                @select(routeForm("arriveAirport.id"), options(Airport.options()), '_label -> "降落机场")
+                @input(routeForm("departTime"), '_label -> "起飞时间", '_showConstraints -> false) { (id, name, value, args) =>
                     <div class="controls input-append time-picker">
-                        <input type="text" id="@id" name="@name" value="@value" data-format="hh:mm" @toHtmlArgs(args) />
+                        <input type="text" id="@id" name="@name" value="@value" data-format="hh:mm" />
                         <span class="add-on">
                             <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                             </i>
                         </span>
                     </div>
                 }
-                @input(routeForm("arriveTime"), '_label -> "到达时间", '_showConstraints -> false) { (id, name, value, args) =>
+                @input(routeForm("arriveTime"), '_label -> "降落时间", '_showConstraints -> false) { (id, name, value, args) =>
                     <div class="controls input-append time-picker">
-                        <input type="text" id="@id" name="@name" value="@value" data-format="hh:mm" @toHtmlArgs(args) />
+                        <input type="text" id="@id" name="@name" value="@value" data-format="hh:mm" />
                         <span class="add-on">
                             <i data-time-icon="icon-time" data-date-icon="icon-calendar">
                             </i>
