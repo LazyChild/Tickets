@@ -7,6 +7,9 @@ import play.db.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -14,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Route extends Model {
 
     @Id

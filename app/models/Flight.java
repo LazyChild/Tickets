@@ -7,9 +7,14 @@ import play.db.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Flight extends Model {
 
     @Id

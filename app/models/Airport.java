@@ -7,11 +7,16 @@ import play.db.ebean.Model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Airport extends Model {
 
     @Id

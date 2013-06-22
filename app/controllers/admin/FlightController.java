@@ -3,15 +3,20 @@ package controllers.admin;
 import models.Flight;
 import models.Ticket;
 import play.data.Form;
-import play.mvc.Controller;
+import play.mvc.*;
 import play.mvc.Result;
-import play.mvc.Security;
-import play.mvc.With;
 import views.html.admin.flight.flight_create;
 import views.html.admin.flight.flight_edit;
 import views.html.admin.flight.flight_index;
 import views.html.admin.flight.flight_view;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.transform.*;
+import java.io.StringWriter;
 import java.util.List;
 
 @Security.Authenticated(Secured.class)
@@ -54,6 +59,22 @@ public class FlightController extends Controller {
     public static Result delete(Long id) {
         Flight.finder.ref(id).delete();
         return redirect(routes.FlightController.index());
+    }
+
+    @BodyParser.Of(BodyParser.Xml.class)
+    public static Result xml() throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(Flight.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+        StringBuilder sb = new StringBuilder("<flights>\n");
+        for (Flight flight : Flight.finder.all()) {
+            StringWriter writer = new StringWriter();
+            marshaller.marshal(flight, writer);
+            sb.append(writer.toString());
+        }
+        sb.append("\n</flights>");
+        return ok(sb.toString());
     }
 
     public static Result view(Long id) {
